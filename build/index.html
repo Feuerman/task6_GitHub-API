@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GitHub API</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <header></header>
+  <section>
+    <div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand">GitHub API application</a>
+        </div>
+        <div class="navbar-collapse collapse auth-block">
+          <form role="form" name="authForm" class="navbar-form navbar-right auth-form">
+            <div class="form-group">
+              <input type="email" name="login" placeholder="login" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" required="required" placeholder="password" class="form-control"/>
+            </div>
+            <div class="checkbox"></div>
+            <input type="submit" value="Sign in" class="btn btn-success auth-form--submit"/>
+          </form>
+          <div class="profile navbar-form pull-right"></div>
+          <script type="text/template" id="profile-template">
+            	<div class="profile__image">
+            		<img src="<%- items.avatar_url %>" alt="Avatar" width="30px" height="30px">
+            	</div>
+            	<div class="profile__name">
+            		<a href="<%- items.html_url %>" class="profile__link"><%- items.login %></a>
+            	</div>
+            	<button class="btn btn-danger profile__logout" >Logout</button>				
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="container page-content">
+      <div class="col-sm-6 col-xs-12">
+        <div class="row">
+          <h3 class="text-center">Search repositories</h3>
+          <div class="form-group">
+            <input type="text" placeholder="search" class="rep-search form-control"/>
+          </div>
+          <div class="rep-content">
+            <script type="text/template" id="rep-template">
+              <% items.forEach(function(item) { %>
+              	<dl class="dl-horizontal">
+              		<dt>Full Name:</dt>
+              		<dd class="ellipsis"><%- item.full_name %></dd>
+              		<dt>Description:</dt>
+              		<dd class="ellipsis"><%- item.description %></dd>
+              		<dt>Language:</dt>
+              		<dd><%- item.language %></dd>
+              		<dt>Link:</dt>
+              		<dd class="ellipsis">
+              			<a href="<%- item.html_url %>" target="_blank"><%- item.html_url %></a>
+              		</dd>
+              	</dl>
+              <% }); %>
+            </script>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 col-sm-offset-2 col-xs-12">
+        <div class="row">
+          <h3 class="text-center">Create gist</h3>
+        </div>
+        <form name="gist__form" enctype="multipart/form-data" class="form-horizontal gist__form">
+          <div class="form-group">
+            <input type="text" name="gistName" placeholder="file name" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <textarea name="gistContent" cols="30" rows="10" placeholder="content for gist" class="form-control"></textarea>
+          </div>
+          <div class="form-group text-center">
+            <input type="submit" value="Create" class="btn btn-primary"/>
+          </div>
+        </form>
+        <div class="row gist__link"></div>
+        <script type="text/template" id="gist-template"><a class="ellipsis" href="<%- items.html_url %>" target="_blank"><%- items.html_url %></a></script>
+      </div>
+    </div>
+  </section>
+  <footer></footer>
+  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+</body>

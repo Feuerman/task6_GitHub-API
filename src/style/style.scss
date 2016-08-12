@@ -1,0 +1,54 @@
+.page-content {
+	padding-top: 100px;
+}
+
+.auth-block {
+	.profile {
+		display: none;
+	}
+	&--authorized {
+		.auth-form {
+			display: none;
+		}
+		.profile {
+			display: flex;
+		}
+	}
+}
+
+.profile {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	&__name {
+		margin-right: 20px;
+	}
+	&__image {
+		margin-right: 10px;
+	}
+	&__link {
+		font-weight: bold;
+		font-size: 1.2em;
+		color: #9d9d9d;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	&__logout {
+		
+	}
+}
+.ellipsis {
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 768px) {
+	.dl-horizontal dt {
+		width: 90px;
+	}
+	.dl-horizontal dd {
+		margin-left: 100px;	
+	}
+}

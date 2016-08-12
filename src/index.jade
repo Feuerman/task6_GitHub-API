@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+	meta(charset="UTF-8")
+	meta(name="viewport" content="width=device-width, initial-scale=1.0")
+	title GitHub API
+	link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+	link(rel="stylesheet", href="css/style.css")
+body
+	header
+
+	section
+		.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+			.container
+				.navbar-header
+					button.navbar-toggle.collapsed(type="button" class="" data-toggle="collapse" data-target=".navbar-collapse")
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href="/") GitHub API application
+				.navbar-collapse.collapse.auth-block
+					form.navbar-form.navbar-right.auth-form(role="form" name="authForm")
+						div.form-group
+							input.form-control(type="email" name="login" placeholder="login")
+						div.form-group
+							input.form-control(type="password" name="password" required="required" placeholder="password")
+						div.checkbox
+						input.btn.btn-success.auth-form--submit(type="submit" value="Sign in")
+					.profile.navbar-form.pull-right
+					script(type="text/template" id="profile-template")
+							|	<div class="profile__image">
+							|		<img src="<%- items.avatar_url %>" alt="Avatar" width="30px" height="30px">
+							|	</div>
+							|	<div class="profile__name">
+							|		<a href="<%- items.html_url %>" class="profile__link"><%- items.login %></a>
+							|	</div>
+							|	<button class="btn btn-danger profile__logout" >Logout</button>				
+		.container.page-content
+			.col-sm-6.col-xs-12
+				.row
+					h3.text-center Search repositories
+					.form-group
+						input.rep-search.form-control(type="text" placeholder="search")
+					.rep-content
+						script(type="text/template" id="rep-template")
+							| <% items.forEach(function(item) { %>
+							|	<dl class="dl-horizontal">
+							|		<dt>Full Name:</dt>
+							|		<dd class="ellipsis"><%- item.full_name %></dd>
+							|		<dt>Description:</dt>
+							|		<dd class="ellipsis"><%- item.description %></dd>
+							|		<dt>Language:</dt>
+							|		<dd><%- item.language %></dd>
+							|		<dt>Link:</dt>
+							|		<dd class="ellipsis">
+							|			<a href="<%- item.html_url %>" target="_blank"><%- item.html_url %></a>
+							|		</dd>
+							|	</dl>
+							| <% }); %>
+
+			.col-sm-4.col-sm-offset-2.col-xs-12
+				.row
+					h3.text-center Create gist
+				form.form-horizontal.gist__form(name="gist__form" enctype="multipart/form-data")
+					.form-group
+						input.form-control(type="text" name="gistName" placeholder="file name")
+					.form-group
+						textarea.form-control(name="gistContent", cols="30", rows="10" placeholder="content for gist")
+					.form-group.text-center
+						input.btn.btn-primary(type="submit" value="Create")
+				.row.gist__link
+				script(type="text/template" id="gist-template")
+					| <a class="ellipsis" href="<%- items.html_url %>" target="_blank"><%- items.html_url %></a>
+	footer
+	script(src="https://code.jquery.com/jquery-2.2.4.js")
+	script(src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js")
+	script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js")
+	script(type="text/javascript" src="js/app.js")
+
+	
