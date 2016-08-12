@@ -57,6 +57,7 @@ gulp.task('jsbuild', function () {
         .pipe(babel({
             presets: ['es2015']
         }))
+        .pipe(uglify())
         .pipe(gulp.dest(path.build.js))
         .pipe(reload({stream: true}));
 });
@@ -65,7 +66,7 @@ gulp.task('stylebuild', function () {
     gulp.src(path.src.style)        
         .pipe(sass())
         .pipe(prefixer())
-        //.pipe(cssmin())
+        .pipe(cssmin())
         .pipe(gulp.dest(path.build.css))
         .pipe(reload({stream: true}));
 });
